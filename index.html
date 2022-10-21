@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="eng">
+	<meta charset = "UTF-8">
+	<title> Test Title </title>
+	
+	<head>
+	
+	</head>
+	
+	<body>
+		<script>
+			const choice = ['Rock','Paper','Scissors'];
+			const lengthOfArray = choice.length;
+			let winCounter = 0;
+			let winOutcome = 0;
+			let test;
+			
+			function getComputerChoice() {
+				test=Math.ceil(Math.random() * lengthOfArray)-1;
+				let randomChoice = choice[test];
+				return randomChoice;
+			}
+			
+			function correctText(text) {
+				let textArray = text.split('');
+				let lengthOfArray = textArray.length;
+				let firstLetter = textArray[0].toUpperCase();
+				let secondaryLetters = '';
+				for (let i=1;i<lengthOfArray;i++) {
+					secondaryLetters = secondaryLetters + textArray[i].toLowerCase();
+				}
+				text = firstLetter + secondaryLetters;
+				return text;
+			}
+			
+			function playRound(playerSelection, computerSelection) {
+				//playerSelection = getComputerChoice();
+				//computerSelection = getComputerChoice();
+				playerSelection = correctText(playerSelection);
+				computerSelection = correctText(computerSelection);
+
+				
+				let winCondition = "You Win! " + playerSelection + " beats " +computerSelection;
+				let loseCondition = "You Lose! " + computerSelection + " beats " +playerSelection;
+				
+				if (playerSelection != computerSelection) {
+					
+					//Checks if playerSelection is rock
+					if (playerSelection === 'Rock') {
+						if (computerSelection === 'Scissors') {
+							winCounter += 1
+							return winCondition;
+						}
+						else {
+							return loseCondition;
+						}
+					}
+					else if (playerSelection === 'Scissors') {
+						if (computerSelection === 'Paper') {
+							winCounter += 1
+							return winCondition;
+						}
+						else {
+							return loseCondition;
+						}
+					}
+					
+					else if (playerSelection === 'Paper') {
+						if (computerSelection === 'Rock') {
+							winCounter += 1
+							return winCondition;
+						}
+						else {
+							return loseCondition;
+						}
+					}
+					else {
+						return;
+					}
+				}
+				
+				// CONDITION: TIE
+				else {
+					return "Tie! You both chose " + playerSelection;
+				}
+			}
+			
+			function game() {
+				
+				let userPrompt = prompt("Rock, Paper, or Scissors?");
+				
+				for (let i=0;i<5;i++) {
+					return playRound(userPrompt,getComputerChoice());
+				}
+				
+				return "You have won " + winCounter + " times, and the computer has won "+ (5-winCounter) + " times. The score is " + winCounter + " to " + (5-winCounter);
+				
+			}
+		
+		</script>
+		
+	</body>
+
+</html>
