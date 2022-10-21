@@ -9,18 +9,22 @@
 	
 	<body>
 		<script>
-			const choice = ['Rock','Paper','Scissors'];
-			const lengthOfArray = choice.length;
-			let winCounter = 0;
-			let winOutcome = 0;
-			let test;
+            
+			const choice = ['Rock','Paper','Scissors'] //Array containing the three choices 
+			const lengthOfArray = choice.length; //Length of the Array
+
+			let winCounter = 0; //Counts the amount of times a player wins
+            let loseCounter = 0; //Counts the amount of times a player loses
+
 			
+            //Function to generate a random action
 			function getComputerChoice() {
-				test=Math.ceil(Math.random() * lengthOfArray)-1;
-				let randomChoice = choice[test];
+				let randomNumber=Math.ceil(Math.random() * lengthOfArray)-1;
+				let randomChoice = choice[randomNumber];
 				return randomChoice;
 			}
 			
+            //Function to correct the formatting of the inputted text
 			function correctText(text) {
 				let textArray = text.split('');
 				let lengthOfArray = textArray.length;
@@ -33,6 +37,7 @@
 				return text;
 			}
 			
+            //Function checking for who wins the game.
 			function playRound(playerSelection, computerSelection) {
 				//playerSelection = getComputerChoice();
 				//computerSelection = getComputerChoice();
@@ -40,37 +45,43 @@
 				computerSelection = correctText(computerSelection);
 
 				
-				let winCondition = "You Win! " + playerSelection + " beats " +computerSelection;
-				let loseCondition = "You Lose! " + computerSelection + " beats " +playerSelection;
+				const winCondition = "You Win! " + playerSelection + " beats " +computerSelection;
+				const loseCondition = "You Lose! " + computerSelection + " beats " +playerSelection;
 				
 				if (playerSelection != computerSelection) {
 					
-					//Checks if playerSelection is rock
+					//All conditions for if the player gets 'Rock'
 					if (playerSelection === 'Rock') {
 						if (computerSelection === 'Scissors') {
-							winCounter += 1
+							winCounter += 1;
 							return winCondition;
 						}
 						else {
+                            loseCounter += 1;
 							return loseCondition;
 						}
 					}
+
+                    //All conditions for if the player gets 'Scissors'
 					else if (playerSelection === 'Scissors') {
 						if (computerSelection === 'Paper') {
-							winCounter += 1
+							winCounter += 1;
 							return winCondition;
 						}
 						else {
+                            loseCounter += 1;
 							return loseCondition;
 						}
 					}
 					
+                    //All conditions for if the player gets 'Paper'
 					else if (playerSelection === 'Paper') {
 						if (computerSelection === 'Rock') {
-							winCounter += 1
+							winCounter += 1;
 							return winCondition;
 						}
 						else {
+                            loseCounter += 1;
 							return loseCondition;
 						}
 					}
@@ -79,24 +90,37 @@
 					}
 				}
 				
-				// CONDITION: TIE
+				//Condition if both computer and player get the same value
 				else {
 					return "Tie! You both chose " + playerSelection;
 				}
 			}
 			
+            //Simulates a rock,paper,scissors game 5 times and displays the outcome.
 			function game() {
 				
-				let userPrompt = prompt("Rock, Paper, or Scissors?");
+                //Variable for prompting user
+				let userPrompt;
 				
+                //Prompts the user 5 times for inputting choice of action.
 				for (let i=0;i<5;i++) {
-					return playRound(userPrompt,getComputerChoice());
+                    userPrompt = prompt("Rock, Paper, or Scissors?");
+					console.log(playRound(userPrompt,getComputerChoice()));
 				}
-				
-				return "You have won " + winCounter + " times, and the computer has won "+ (5-winCounter) + " times. The score is " + winCounter + " to " + (5-winCounter);
-				
+				//Displaying how many times each player has won.
+				console.log("You have won " + winCounter + " times, and the computer has won "+ loseCounter + " times. The score is " + winCounter + " to " + loseCounter);
+                
+                //Checks if the player or computer wins based on comparing the counters.
+                if (winCounter>loseCounter) {
+                    console.log("You have beaten the computer!");
+                }
+
+                else {
+                    console.log("You suck! The computer beat you at Rock, Paper, Scissors!");
+                }
 			}
-		
+            
+            game();
 		</script>
 		
 	</body>
