@@ -116,10 +116,18 @@
 			}
 			
 			function checkCounters(win,lose) {
-				if (win + lose === 5) {
+				if (win + lose === 5 & win>lose) {
 					winCounter = 0;
 					loseCounter = 0;
-					alert("Game has reached best of 5! Resetting Score!")
+					alert("You have won the game!");
+					alert("Game has reached best of 5! Resetting Score!");
+				}
+
+				else if (win + lose === 5 & win<lose) {
+					winCounter = 0;
+					loseCounter = 0;
+					alert("You have lost the game!");
+					alert("Game has reached best of 5! Resetting Score!");
 				}
 			}
 
