@@ -2,12 +2,31 @@
 <html lang="eng">
 	<meta charset = "UTF-8">
 	<title> Test Title </title>
+	<link rel="stylesheet" href="stylesheet.css">
 	
 	<head>
 	
 	</head>
 	
 	<body>
+		<div id="container">
+			<div id="header">ROCK, PAPER, SCISSORS!</div>
+
+			<div id="buttons">
+				<button id="rock">Rock</button>
+				<button id="paper">Paper</button>
+				<button id="scissors">Scissors</button>
+			</div>
+			<br>
+			<div id="scores">
+				<div id="humanScore"></div>
+				<div id="computerScore"></div>
+				<div id="finalScore"></div>
+			</div>
+
+			<div id="footer"></div>
+		</div>
+		
 		<script>
             
 			const choice = ['Rock','Paper','Scissors'] //Array containing the three choices 
@@ -41,7 +60,7 @@
 			function playRound(playerSelection, computerSelection) {
 				//playerSelection = getComputerChoice();
 				//computerSelection = getComputerChoice();
-				playerSelection = correctText(playerSelection);
+				//playerSelection = correctText(playerSelection);
 				computerSelection = correctText(computerSelection);
 
 				
@@ -96,6 +115,46 @@
 				}
 			}
 			
+			function checkCounters(win,lose) {
+				if (win + lose === 5) {
+					winCounter = 0;
+					loseCounter = 0;
+					alert("Game has reached best of 5! Resetting Score!")
+				}
+			}
+
+			//Adding buttons to the div container
+			const container = document.querySelector('#container');
+
+
+			//Event Listeners for action selection. Resets counters to 0 once 
+			//best of 5 is reached.
+			buttons = document.querySelectorAll('button');
+			buttons.forEach((button) => {
+				button.addEventListener('click', event => {
+					alert(playRound(button.textContent,getComputerChoice()));
+
+					checkCounters(winCounter,loseCounter);
+
+					//Displays Human Score
+					let humanScore = document.querySelector('#humanScore')
+					humanScore.textContent = "Human Score: " + winCounter;
+					humanScore.style.backgroundColor = 'Blue';
+
+					//Displays Computer Score
+					let computerScore = document.querySelector('#computerScore')
+					computerScore.textContent = "Computer Score: " + loseCounter;
+					computerScore.style.backgroundColor = 'Red';
+
+					//Displays final score
+					let finalScore = document.querySelector('#finalScore')
+					finalScore.textContent = "Final Score is " + winCounter + " to " + loseCounter;
+					finalScore.style.backgroundColor = 'Green';
+
+				})
+			});
+
+			/*
             //Simulates a rock,paper,scissors game 5 times and displays the outcome.
 			function game() {
 				
@@ -121,6 +180,7 @@
 			}
             
             game();
+			*/
 		</script>
 		
 	</body>
